@@ -104,7 +104,7 @@ def gameplay():
 
     time = pygame.time.get_ticks()/1000
     pygame.quit()
-
+    #Opening a window to recup the name of the player to put it in the leaderboard
     def see_score():
 
         message.configure(text='Your score is ' + str(time))
@@ -114,40 +114,22 @@ def gameplay():
     fenetre.title('Fin du jeu')
 
     fenetre.minsize(width=500, height=250)
-
-    # marges intérieures
-
     fenetre.config(padx=20, pady=20)
-
-    # libellé
-
     libelle = Label(fenetre, text='Enter your name:')
 
     libelle.pack()
 
-    # boîte de saisie
-
     nom = Entry(fenetre)
-
-    nom.focus_set()  # boîte de saisie par défaut
-
+    nom.focus_set()
     nom.pack(pady=10)
-
-    # libellé pour afficher un message
-
     message = Label(fenetre, text='')
-
     message.pack(padx=10, pady=(0, 10))
+    #Button to see the score of the player
+    button_submit = Button(fenetre, text='See my score', command=see_score)
+    button_submit.pack(padx=10, pady=(0, 10))
 
-    # boutons
-
-    bouton_soumettre = Button(fenetre, text='See my score', command=see_score)
-
-    bouton_soumettre.pack(padx=10, pady=(0, 10))
-
-    bouton_terminer = Button(fenetre, text='Quit', command=fenetre.destroy)
-
-    bouton_terminer.pack(padx=10, pady=(0, 10))
+    button_end = Button(fenetre, text='Quit', command=fenetre.destroy)
+    button_end.pack(padx=10, pady=(0, 10))
 
     # la fenêtre s'affiche puis attend les interactions de l'usager
 
