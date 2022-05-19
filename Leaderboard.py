@@ -19,36 +19,35 @@ def list_scoreboard():
 def true_edit_leaderboard(player):
     # This function permit to edit the ScoreBoard.txt file and add a new high score
     LeaderBoard = list_scoreboard()
-    print("LeaderBoard = ", LeaderBoard)
     Scores = []
     for i in range(len(LeaderBoard)):
         if i % 2 == 1:
             Scores.append(LeaderBoard[i])
     i = 0
-    print("Len scores = ", len(Scores))
-    print("Scores bb", Scores)
     if player[1] < Scores[0]:
         LeaderBoard.insert(0, player[1])
         LeaderBoard.insert(0, player[0])
-        print(1)
     elif player[1] > Scores[-1]:
         LeaderBoard.append(player[0])
         LeaderBoard.append(player[1])
-        print(2)
     else:
-        i = 0
-        add = False
-        while i < len(Scores):
+        i = 1
+        end=0
+        while i < len(Scores) and end!=1:
             if player[1] > Scores[i]:
                 i += 1
             else:
-                LeaderBoard.insert(i * 2, player[1])
-                LeaderBoard.insert(i * 2, player[0])
-    print("final list = ", LeaderBoard)
+                LeaderBoard.insert(i+1, player[1])
+                LeaderBoard.insert(i+1, player[0])
+                end = 1
     if len(LeaderBoard)>20:
-        LeaderBoard.pop()
-        LeaderBoard.pop()
-    return LeaderBoard
+        LeaderBoard.pop(0)
+        LeaderBoard.pop(0)
+    with open("ScoreBoard.txt","w") as txt:
+        for x in range(len(LeaderBoard)):
+            txt.write(str(LeaderBoard[x]))
+            txt.write("\n")
+
 
 def leaderboard_window():
     List=list_scoreboard()
@@ -56,17 +55,17 @@ def leaderboard_window():
     f = font.Font(size=25)
     window.title("GETTING OVER YOU")
     window.configure(background="Black")
-    window.geometry("800x800")
-    window.resizable(width=0, height=0)
+    window.geometry("800x500")
+    window.resizable()
     number=1
 
-    Title=tkinter.Label(text="LeaderBoard:\r", bg="black",font = f, foreground='#FFFFFF',)
+    Title=Label(window, text="LeaderBoard:\r", bg="black",font = f, foreground='#FFFFFF',)
     Title.pack()
-    Title=tkinter.Label(text="\r", bg="black",font = f, foreground='#FFFFFF',)
+    Title=Label(window, text="\r", bg="black",font = f, foreground='#FFFFFF',)
     Title.pack()
     for i in range(0,20,2):
-        l = tkinter.Label(text=str(number)+"-  "+str(List[i])+" : "+str(List[i+1])+" sec", bg="black",font = f, foreground='#FFFFFF',)
-        l.pack()
+        line = Label(window, text=str(number)+"-  "+str(List[i])+" : "+str(List[i+1])+" sec", bg="black",font = f, foreground='#FFFFFF',)
+        line.pack()
         number+=1
 
 

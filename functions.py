@@ -1,9 +1,9 @@
 import pygame
 from game import Game
 from tkinter import *
-
+from hammer import Hammer
 def gameplay():
-    R_T=()
+    R_T=(0,)
     pygame.init()
     fps = 60
 
@@ -13,18 +13,12 @@ def gameplay():
 
     # generate base window size
 
-    Screen = pygame.display.set_mode((1280, 720))
+    Screen = pygame.display.set_mode((1000, 720))
 
     # background import
 
     background_jeu = pygame.image.load('assets/background.jpg').convert_alpha()
 
-    # creation of the game menu
-
-    Img_accueil = pygame.image.load('assets/Image_banner.png').convert_alpha()
-    Img_accueil_rect = Img_accueil.get_rect()
-    Img_accueil_rect.x = Screen.get_width() / 2.5
-    Img_accueil_rect.y = Screen.get_height() / 2.5
 
     # creation of the play bouton 
 
@@ -71,7 +65,6 @@ def gameplay():
                 # homepage 
 
                 Screen.blit(play_button, play_button_rect)
-                Screen.blit(Img_accueil, Img_accueil_rect)
 
             # window update
 
@@ -103,34 +96,24 @@ def gameplay():
     #The game is ended
 
     time = pygame.time.get_ticks()/1000
+    time=round(time)
     pygame.quit()
     #Opening a window to recup the name of the player to put it in the leaderboard
-    def see_score():
 
-        message.configure(text='Your score is ' + str(time))
+    def validate():
+        ('%s' % entry.get())
+        window.destroy()
 
-    fenetre = Tk()
-
-    fenetre.title('Fin du jeu')
-
-    fenetre.minsize(width=500, height=250)
-    fenetre.config(padx=20, pady=20)
-    libelle = Label(fenetre, text='Enter your name:')
-
-    libelle.pack()
-
-    nom = Entry(fenetre)
-    nom.focus_set()
-    nom.pack(pady=10)
-    message = Label(fenetre, text='')
-    message.pack(padx=10, pady=(0, 10))
-    #Button to see the score of the player
-    button_submit = Button(fenetre, text='See my score', command=see_score)
-    button_submit.pack(padx=10, pady=(0, 10))
-
-    button_end = Button(fenetre, text='Quit', command=fenetre.destroy)
-    button_end.pack(padx=10, pady=(0, 10))
-    fenetre.mainloop()
+    window = Tk()
+    label = Label(window, text="Tell us your name!", width=50,font=("Times", 20))
+    label.pack()
+    val = StringVar()
+    val.set("Player")
+    entry = Entry(window, textvariable=val, width=20)
+    entry.pack()
+    button = Button(window, text="Valider", command=validate, width=10)
+    button.pack()
+    window.mainloop()
+    player = [val.get(),time]
     from Leaderboard import true_edit_leaderboard
-    player = [nom.get(), time]
     true_edit_leaderboard(player)
