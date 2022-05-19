@@ -130,8 +130,7 @@ def gameplay():
 
     button_end = Button(fenetre, text='Quit', command=fenetre.destroy)
     button_end.pack(padx=10, pady=(0, 10))
-
-    # la fenêtre s'affiche puis attend les interactions de l'usager
-
     fenetre.mainloop()
-    #add_leaderboard(nom.get(), time)
+    from Leaderboard import true_edit_leaderboard
+    player = [nom.get(), time]
+    true_edit_leaderboard(player)
