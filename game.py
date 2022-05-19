@@ -18,7 +18,6 @@ class Game:
     def update(self, Screen, R_P):
 
         # detect mouse position
-        hammer_image=self.hammer.image
         position = pygame.mouse.get_pos()
         print(position)
         angle = atan2(position[1] - (self.hammer.position[1]),
@@ -47,7 +46,8 @@ class Game:
 
         else:
             playerpos1 = self.player.x, self.player.y
-            Screen.blit(R_P[0], R_P[1])
+            if len(R_P)==2:
+                Screen.blit(R_P[0], R_P[1])
 
 
         # checks if there is no collision with the decor from the player

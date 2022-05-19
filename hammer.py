@@ -6,7 +6,6 @@ import math
 # class for the hammer
 
 class Hammer(pygame.sprite.Sprite):
-
     def __init__(self):
         super().__init__()
         self.player=Player()
@@ -16,6 +15,5 @@ class Hammer(pygame.sprite.Sprite):
         self.y=self.player.position_center_y
         self.position=self.x, self.y
         self.top=self.x+100, self.y
-        self.topimage=pygame.image.load('assets/point.png').convert_alpha()
 
 
